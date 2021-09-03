@@ -4,6 +4,6 @@ JS
 React
 GraphQL
 Express
-Firebase || MongoDB
+MongoDB
 Mongoose
 
