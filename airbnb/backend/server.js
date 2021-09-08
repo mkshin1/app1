@@ -1,18 +1,19 @@
 const express = require('express')
+const {ApolloServer} = require('apollo-server-express')
+const resolvers = require('./schema/resolvers')
+const typeDefs = require('./schema/typeDefs')
 
-const { MongoClient } = require('mongodb');
+async function startServer() {
+    const app = express()
+    const apolloServer = new ApolloServer({typeDefs, resolvers})
 
-const app = express()
+    await apolloServer.start()
 
-let port = 8000
+    apolloServer.applyMiddleware({app: app})
 
-app.get('/', (req,res) => {
-    res.send('testing')
-})
+    app.listen(4000, () => {
+        console.log(`server is running on port 4000`)
+    })
 
-
-
-
-app.listen(port, () => {
-    console.log('server is running on ' + port)
-})
+}
+startServer()
